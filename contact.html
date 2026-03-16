@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Contact — Max Colls</title>
+  <meta name="description" content="Get in touch with Max Colls — book a call, say hello, or talk about a project." />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Calendly widget styles — loads the embed functionality -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+
+  <style>
+
+    /* ── FULL PAGE LAYOUT ─────────────────────────────── */
+    /*
+      This page is deliberately different from the others.
+      Instead of a standard hero + sections, the whole page
+      is one centred column — intimate, intentional, calm.
+    */
+
+    .contact-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-3xl) 0 var(--space-2xl);
+    }
+
+    .contact-inner {
+      max-width: 680px;           /* narrower than usual — feels like a letter */
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+
+    /* ── HEADING BLOCK ────────────────────────────────── */
+
+    .contact-eyebrow {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-green);
+    }
+
+    .contact-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--color-ink);
+    }
+
+    /* The italic line — gives it warmth */
+    .contact-heading em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-green);
+      display: block;
+    }
+
+    .contact-subtext {
+      font-size: var(--text-lg);
+      color: var(--color-muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+
+    /* ── ILLUSTRATION ─────────────────────────────────── */
+
+    .contact-illustration-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .contact-illustration {
+      width: 100px;
+      mix-blend-mode: multiply;
+      flex-shrink: 0;
+      /* Slow continuous gentle rock animation */
+      animation: gentleRock 6s ease-in-out infinite;
+    }
+
+    @keyframes gentleRock {
+      0%, 100% { transform: rotate(-2deg); }
+      50%       { transform: rotate(2deg); }
+    }
+
+    .contact-illustration-text {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: var(--text-xl);
+      color: var(--color-ink);
+      line-height: 1.4;
+    }
+
+
+    /* ── CALENDLY EMBED ───────────────────────────────── */
+
+    /*
+      Calendly injects an iframe into .calendly-inline-widget.
+      We control the outer container size here.
+      min-width: 320px is required by Calendly.
+    */
+    .calendly-wrap {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;          /* clips the iframe to our border-radius */
+      background: white;         /* Calendly has a white bg by default */
+    }
+
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 700px;
+    }
+
+
+    /* ── FOOTER NOTE ──────────────────────────────────── */
+
+    .contact-footer-note {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      line-height: 1.6;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-lg);
+    }
+
+    .contact-footer-note a {
+      color: var(--color-ink);
+      border-bottom: 1px solid var(--color-border);
+      transition: border-color var(--transition-fast);
+    }
+
+    .contact-footer-note a:hover {
+      border-color: var(--color-ink);
+    }
+
+
+    /* ── MOBILE ───────────────────────────────────────── */
+
+    @media (max-width: 768px) {
+
+      .contact-page {
+        justify-content: flex-start;
+        padding-top: calc(var(--space-3xl) + 20px);
+      }
+
+      .contact-illustration-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+      }
+
+      .contact-illustration {
+        width: 72px;
+      }
+
+      .calendly-inline-widget {
+        height: 800px;           /* more height on mobile — Calendly needs it */
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Max Colls</a>
+    <ul class="nav-links">
+      <li><a href="work.html"    class="nav-link">Work</a></li>
+      <li><a href="about.html"   class="nav-link">About</a></li>
+      <li><a href="contact.html" class="nav-link active">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       CONTACT PAGE
+       One centred column — feels like a letter, not a form.
+  ═══════════════════════════════════════════════════════════ -->
+  <main class="contact-page page-offset">
+    <div class="contact-inner">
+
+      <!-- Heading block -->
+      <div class="animate-fade-up">
+        <span class="contact-eyebrow">Get in touch</span>
+        <h1 class="contact-heading">
+          Let's find a<br>
+          <em>good time to talk.</em>
+        </h1>
+        <p class="contact-subtext">
+          Whether you're looking for help with your business, want to
+          talk through a project, or just want to say hello —
+          pick a time below and let's have a conversation.
+        </p>
+      </div>
+
+      <!-- Illustration + short line -->
+      <div class="contact-illustration-wrap animate-fade-up delay-1">
+        <img
+          class="contact-illustration"
+          src="hourglass.png"
+          alt="Hourglass — vintage etching illustration"
+        />
+        <p class="contact-illustration-text">
+          30 minutes.<br>No agenda required.
+        </p>
+      </div>
+
+      <!-- Calendly embed -->
+      <!--
+        The div below is where Calendly injects its booking calendar.
+        The script at the bottom of the page reads this div's
+        data-url attribute and renders the calendar inside it.
+      -->
+      <div class="calendly-wrap animate-fade-up delay-2">
+        <div
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/maxcolls/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=12125C&primary_color=2d6a2d"
+        ></div>
+      </div>
+
+      <!-- Footer note -->
+      <p class="contact-footer-note animate-fade-up delay-3">
+        Prefer email? Reach me at
+        <a href="mailto:max@peaklab.ca">max@peaklab.ca</a>.
+        You can also find me on
+        <a href="https://linkedin.com/in/maxcolls" target="_blank" rel="noopener">LinkedIn</a>
+        or check out
+        <a href="https://peaklab.ca" target="_blank" rel="noopener">Peak Lab</a>
+        if you're a small business looking for help.
+      </p>
+
+    </div>
+  </main>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER — minimal on this page, content is the focus
+  ═══════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-name">Max Colls</span>
+        <nav class="footer-nav">
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://peaklab.ca" target="_blank" rel="noopener">Peak Lab ↗</a>
+        </nav>
+        <span class="footer-copy">© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       CALENDLY SCRIPT
+       This loads Calendly's embed code. It finds the div
+       with class .calendly-inline-widget and renders the
+       booking calendar inside it automatically.
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+</body>
+</html>

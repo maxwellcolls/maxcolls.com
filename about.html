@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About — Max Colls</title>
+  <meta name="description" content="Max Colls is a Vancouver-based consultant and builder. Startup career, outdoor adventurer, photographer, and founder of Peak Lab." />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+
+    /* ── PAGE HERO ────────────────────────────────────── */
+
+    .page-hero {
+      padding: var(--space-2xl) 0 var(--space-xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .page-hero-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--color-ink);
+    }
+
+    .page-hero-meta {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      font-family: var(--font-body);
+      text-align: right;
+      line-height: 1.6;
+      max-width: 240px;
+    }
+
+
+    /* ── ABOUT BODY ───────────────────────────────────── */
+
+    .about-body {
+      padding: var(--space-2xl) 0;
+    }
+
+    /*
+      Two-column layout:
+      - Left: main text content (wider)
+      - Right: illustration (narrower, sticky)
+    */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /* ── TEXT SIDE ────────────────────────────────────── */
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    /* Each named section within the about content */
+    .about-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .about-block-label {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-green);
+    }
+
+    .about-block h2 {
+      font-size: var(--text-3xl);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+    }
+
+    .about-block p {
+      font-size: var(--text-lg);
+      line-height: 1.75;
+      color: var(--color-text);
+      max-width: 580px;
+    }
+
+    /* Thin rule between blocks */
+    .about-divider {
+      width: 48px;
+      height: 1px;
+      background-color: var(--color-border);
+    }
+
+    /* ── CURRENTLY section — simple two-col fact list ── */
+
+    .currently-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .currently-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: var(--space-md);
+      align-items: baseline;
+    }
+
+    .currently-key {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    .currently-value {
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+
+    .currently-value a {
+      color: var(--color-ink);
+      border-bottom: 1px solid var(--color-border);
+      transition: border-color var(--transition-fast);
+    }
+
+    .currently-value a:hover {
+      border-color: var(--color-ink);
+    }
+
+
+    /* ── ILLUSTRATION SIDE ────────────────────────────── */
+
+    .about-visual {
+      position: sticky;          /* stays in view as you scroll the text */
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .about-illustration {
+      width: 100%;
+      max-width: 280px;
+      mix-blend-mode: multiply;
+      transition: transform var(--transition-slow);
+    }
+
+    .about-illustration:hover {
+      transform: scale(1.03) rotate(1deg);
+    }
+
+    .about-visual-caption {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      text-align: center;
+    }
+
+
+    /* ── CTA STRIP ────────────────────────────────────── */
+
+    .about-cta {
+      padding: var(--space-2xl) 0;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .about-cta-text {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-ink);
+    }
+
+    .about-cta-actions {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+
+    /* ── MOBILE ───────────────────────────────────────── */
+
+    @media (max-width: 768px) {
+
+      .page-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .page-hero-meta {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      /* Stack illustration above text on mobile */
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-visual {
+        position: static;
+        order: -1;               /* illustration appears first */
+      }
+
+      .about-illustration {
+        max-width: 180px;
+        margin: 0 auto;
+      }
+
+      .about-cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .currently-item {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Max Colls</a>
+    <ul class="nav-links">
+      <li><a href="work.html"    class="nav-link">Work</a></li>
+      <li><a href="about.html"   class="nav-link active">About</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE HERO
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="page-hero page-offset">
+    <div class="container">
+      <div class="page-hero-inner">
+
+        <h1 class="animate-fade-up">About</h1>
+
+        <p class="page-hero-meta animate-fade-up delay-2">
+          Vancouver, BC.<br>
+          Usually outside.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       ABOUT BODY
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="about-body">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- ── Left: text content ───────────────────── -->
+        <div class="about-content">
+
+          <!-- Block 1: Career -->
+          <div class="about-block reveal">
+            <span class="about-block-label">Career</span>
+            <h2>Startups, sales,<br>and making things work.</h2>
+            <p>
+              I've spent my career inside startups — from early-stage scrappiness
+              to the messier middle of scaling. I started in sales, got good at it,
+              and gradually found myself pulled toward the harder, more interesting
+              problems: how do you actually build something that lasts?
+            </p>
+            <p>
+              Over time I've moved from closing deals to a more forward-deployed
+              product role — sitting at the intersection of customers, product,
+              and go-to-market. I like taking on the initiatives nobody has quite
+              figured out yet, and turning them into something that works.
+            </p>
+          </div>
+
+          <div class="about-divider"></div>
+
+          <!-- Block 2: Outside work -->
+          <div class="about-block reveal">
+            <span class="about-block-label">Outside work</span>
+            <h2>Always looking for<br>the next adventure.</h2>
+            <p>
+              When I'm not at a desk, I'm usually somewhere in British Columbia —
+              or somewhere further afield — chasing the kind of day you don't
+              forget. I ski, surf, and ride my bike, preferably somewhere new.
+            </p>
+            <p>
+              I also shoot photography. It started as a way to remember places
+              and has turned into something I take seriously — I take on the
+              occasional commercial project when the work is interesting.
+            </p>
+          </div>
+
+          <div class="about-divider"></div>
+
+          <!-- Block 3: Currently -->
+          <div class="about-block reveal">
+            <span class="about-block-label">Currently</span>
+            <h2>Building in public.</h2>
+            <p>
+              Right now I'm focused on two things: helping small business owners
+              navigate growth through Peak Lab, and teaching myself to build
+              the software tools I've always wanted but couldn't find.
+            </p>
+
+            <div class="currently-list">
+
+              <div class="currently-item">
+                <span class="currently-key">Day job</span>
+                <span class="currently-value">
+                  <a href="https://quandri.io" target="_blank" rel="noopener">Quandri</a>
+                  — automating insurance operations
+                </span>
+              </div>
+
+              <div class="currently-item">
+                <span class="currently-key">Consulting</span>
+                <span class="currently-value">
+                  <a href="https://peaklab.ca" target="_blank" rel="noopener">Peak Lab</a>
+                  — ops and growth for small businesses
+                </span>
+              </div>
+
+              <div class="currently-item">
+                <span class="currently-key">Building</span>
+                <span class="currently-value">
+                  A personal health tracking app —
+                  <a href="https://app.peaklab.ca" target="_blank" rel="noopener">app.peaklab.ca</a>
+                </span>
+              </div>
+
+              <div class="currently-item">
+                <span class="currently-key">Learning</span>
+                <span class="currently-value">
+                  HTML, CSS, JavaScript, React
+                </span>
+              </div>
+
+              <div class="currently-item">
+                <span class="currently-key">Based in</span>
+                <span class="currently-value">Vancouver, BC</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- /about-content -->
+
+
+        <!-- ── Right: illustration ──────────────────── -->
+        <div class="about-visual animate-fade-in delay-3">
+          <!--
+            Web/tree illustration — branching, organic,
+            fits the "exploring and building" theme.
+          -->
+          <img
+            class="about-illustration"
+            src="web.png"
+            alt="Abstract branching form — vintage etching illustration"
+          />
+          <span class="about-visual-caption">Figuring it out.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       CTA STRIP
+       Simple prompt to get in touch at the bottom.
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="about-cta reveal">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--space-lg);">
+
+      <p class="about-cta-text">
+        Want to work together<br>or just say hello?
+      </p>
+
+      <div class="about-cta-actions">
+        <a href="contact.html"              class="btn btn-primary">Get in touch</a>
+        <a href="work.html"                 class="btn btn-ghost">See my work</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-name">Max Colls</span>
+        <nav class="footer-nav">
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://peaklab.ca" target="_blank" rel="noopener">Peak Lab ↗</a>
+        </nav>
+        <span class="footer-copy">© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       JAVASCRIPT — scroll reveal
+  ═══════════════════════════════════════════════════════════ -->
+  <script>
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-up');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>

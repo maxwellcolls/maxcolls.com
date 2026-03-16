@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Work — Max Colls</title>
+  <meta name="description" content="Projects and case studies by Max Colls — Peak Lab consulting and the Peak Lab health tracking app." />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+
+    /* ── PAGE HERO ────────────────────────────────────── */
+
+    .page-hero {
+      padding: var(--space-2xl) 0 var(--space-xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .page-hero-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--color-ink);
+    }
+
+    .page-hero-meta {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      font-family: var(--font-body);
+      text-align: right;
+      line-height: 1.6;
+      max-width: 240px;
+    }
+
+
+    /* ── PROJECT LIST ─────────────────────────────────── */
+
+    .projects-list {
+      padding: var(--space-xl) 0;
+    }
+
+
+    /* ── SINGLE PROJECT ROW ───────────────────────────── */
+
+    .project {
+      padding: var(--space-2xl) 0;
+      border-bottom: 1px solid var(--color-border);
+      display: grid;
+      /* Two columns: content and illustration */
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /* Flip layout for even-numbered projects */
+    .project.flip {
+      grid-template-columns: 380px 1fr;
+    }
+
+    /* Move illustration to first column when flipped */
+    .project.flip .project-visual {
+      order: -1;
+    }
+
+
+    /* ── PROJECT CONTENT ──────────────────────────────── */
+
+    .project-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .project-number {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    .project-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .project-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--color-ink);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .project-category {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-green);
+    }
+
+    /* Body copy — multiple paragraphs */
+    .project-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .project-body p {
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* Tag row */
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-xs);
+    }
+
+    .tag {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--color-ink);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      padding: 4px 10px;
+    }
+
+    /* Link row */
+    .project-link-row {
+      margin-top: var(--space-sm);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-ink);
+      border-bottom: 1px solid var(--color-ink);
+      padding-bottom: 2px;
+      transition: opacity var(--transition-fast),
+                  gap var(--transition-fast);
+    }
+
+    .project-link:hover {
+      opacity: 0.6;
+      gap: 10px;               /* arrow slides away on hover */
+    }
+
+
+    /* ── PROJECT VISUAL ───────────────────────────────── */
+
+    .project-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+      position: sticky;        /* illustration sticks as you read the copy */
+      top: 100px;
+    }
+
+    .project-illustration {
+      width: 100%;
+      max-width: 340px;
+      mix-blend-mode: multiply;
+      transition: transform var(--transition-slow);
+    }
+
+    .project-illustration:hover {
+      transform: scale(1.03) rotate(-1deg);  /* subtle tilt on hover */
+    }
+
+    /* Caption under illustration */
+    .project-visual-caption {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      text-align: center;
+    }
+
+
+    /* ── EXPERIENCE SECTIONS ─────────────────────────── */
+
+    .exp-section {
+      padding: var(--space-2xl) 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .exp-section-label {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-green);
+      display: block;
+      margin-bottom: var(--space-lg);
+    }
+
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exp-entry {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--space-xl);
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .exp-entry:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .exp-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 3px;
+    }
+
+    .exp-company {
+      font-family: var(--font-heading);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--color-ink);
+      line-height: 1.2;
+    }
+
+    .exp-dates {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      color: var(--color-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .exp-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .exp-role {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-ink);
+      letter-spacing: 0.02em;
+    }
+
+    .exp-desc {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-xs);
+    }
+
+    @media (max-width: 768px) {
+      .exp-entry {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+      }
+    }
+
+    /* ── MORE COMING ──────────────────────────────────── */
+
+    .more-coming {
+      padding: var(--space-2xl) 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .more-coming p {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: var(--text-xl);
+      color: var(--color-muted);
+      max-width: none;
+      text-align: center;
+    }
+
+    .more-coming span {
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      font-family: var(--font-body);
+    }
+
+
+    /* ── MOBILE ───────────────────────────────────────── */
+
+    @media (max-width: 768px) {
+
+      .page-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .page-hero-meta {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      /* Stack project rows on mobile */
+      .project,
+      .project.flip {
+        grid-template-columns: 1fr;
+      }
+
+      /* Always show illustration on top on mobile */
+      .project .project-visual,
+      .project.flip .project-visual {
+        order: -1;
+        position: static;      /* un-stick on mobile */
+      }
+
+      .project-illustration {
+        max-width: 220px;
+        margin: 0 auto;
+      }
+
+      .project-title {
+        font-size: var(--text-3xl);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Max Colls</a>
+    <ul class="nav-links">
+      <li><a href="work.html"    class="nav-link active">Work</a></li>
+      <li><a href="about.html"   class="nav-link">About</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE HERO
+       Simple headline + a short meta note on the right.
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="page-hero page-offset">
+    <div class="container">
+      <div class="page-hero-inner">
+
+        <h1 class="animate-fade-up">Work</h1>
+
+        <p class="page-hero-meta animate-fade-up delay-2">
+          Projects, experience,<br>
+          and consulting work.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       PROJECTS LIST
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="projects-list">
+    <div class="container">
+
+
+      <!-- ── PROJECT 01: PEAK LAB ───────────────────────── -->
+      <!--
+        id="peaklab" allows the home page cards to link
+        directly to this project with work.html#peaklab
+      -->
+      <article class="project reveal" id="peaklab">
+
+        <!-- Left: content -->
+        <div class="project-content">
+
+          <span class="project-number">01</span>
+
+          <div class="project-header">
+            <span class="project-category">Consulting · Operations · AI</span>
+            <h2 class="project-title">Peak Lab</h2>
+          </div>
+
+          <div class="project-body">
+            <p>
+              Peak Lab is my consulting practice, focused on helping small trades
+              and service businesses — landscapers, electricians, contractors —
+              make the jump from solopreneur chaos to something that actually
+              runs like a business.
+            </p>
+            <p>
+              Most of my clients are great at their craft but drowning in the
+              operational side: no CRM, no lead tracking, quoting jobs from
+              memory, chasing invoices manually. I come in and fix the
+              infrastructure — systems, software, and the processes that
+              connect them.
+            </p>
+            <p>
+              Services include CRM implementation, lead generation setup,
+              local SEO, and operations consulting. I also built and maintain
+              the Peak Lab website — plain HTML and CSS, deployed via GitHub.
+            </p>
+          </div>
+
+          <div class="project-tags">
+            <span class="tag">Operations consulting</span>
+            <span class="tag">CRM setup</span>
+            <span class="tag">Lead generation</span>
+            <span class="tag">Local SEO</span>
+            <span class="tag">HTML / CSS</span>
+          </div>
+
+          <div class="project-link-row">
+            <a
+              href="https://peaklab.ca"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+            >
+              Visit peaklab.ca →
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right: illustration -->
+        <div class="project-visual">
+          <img
+            class="project-illustration"
+            src="riders.png"
+            alt="Two riders on horseback — vintage crayon etching"
+          />
+          <span class="project-visual-caption">Onward.</span>
+        </div>
+
+      </article>
+
+
+      <!-- ── PROJECT 02: HEALTH APP ─────────────────────── -->
+      <!--
+        .flip reverses the grid so illustration is on the left
+        this time — alternating rhythm down the page
+      -->
+      <article class="project flip reveal" id="healthapp">
+
+        <!-- Right: content (visually, due to flip) -->
+        <div class="project-content">
+
+          <span class="project-number">02</span>
+
+          <div class="project-header">
+            <span class="project-category">Dev project · Health · Data</span>
+            <h2 class="project-title">Peak Lab Health</h2>
+          </div>
+
+          <div class="project-body">
+            <p>
+              A personal health tracking dashboard that pulls data from
+              Strava, Garmin, Hevy, and MacroFactor into one place —
+              and uses AI to surface patterns across all of them.
+            </p>
+            <p>
+              The problem it solves: I was tracking everything but understanding
+              nothing. Sleep data in Garmin, runs in Strava, lifts in Hevy,
+              food in MacroFactor — none of it talked to each other. This app
+              connects the dots and asks the question: what actually affects
+              how I feel and perform?
+            </p>
+            <p>
+              Built in React with Vite. Currently in early development —
+              visualisations and data correlation logic are underway.
+              This is also my main learning project as a beginner developer,
+              so the build is as much about understanding the code
+              as shipping the product.
+            </p>
+          </div>
+
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Strava API</span>
+            <span class="tag">Garmin API</span>
+            <span class="tag">Data viz</span>
+            <span class="tag">AI analysis</span>
+          </div>
+
+          <div class="project-link-row">
+            <a
+              href="https://app.peaklab.ca"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+            >
+              Visit app.peaklab.ca →
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Left: illustration (due to flip) -->
+        <div class="project-visual">
+          <img
+            class="project-illustration"
+            src="hourglass.png"
+            alt="Hourglass — vintage etching illustration"
+          />
+          <span class="project-visual-caption">Work in progress.</span>
+        </div>
+
+      </article>
+
+
+    </div><!-- /container -->
+  </div><!-- /projects-list -->
+
+
+  <!-- ══════════════════════════════════════════════════════
+       TECHNOLOGY SALES EXPERIENCE
+       Compact entries: company left, role + description right.
+       Placeholder copy — Max to fill in real details.
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="exp-section reveal">
+    <div class="container">
+
+      <span class="exp-section-label">Technology sales</span>
+
+      <div class="exp-list">
+
+        <!-- Quandri — three roles, shown as one entry with sub-roles -->
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <span class="exp-company">Quandri</span>
+            <span class="exp-dates">Apr 2023 — Present · 3 yrs</span>
+          </div>
+          <div class="exp-content">
+            <!-- Sub-roles listed within the single entry -->
+            <span class="exp-role">Senior Implementation Manager</span>
+            <span class="exp-dates" style="margin-bottom: 2px;">Jan 2026 — Present</span>
+            <span class="exp-role">Implementation Manager</span>
+            <span class="exp-dates" style="margin-bottom: 2px;">Jun 2024 — Mar 2026</span>
+            <span class="exp-role">Account Executive</span>
+            <span class="exp-dates" style="margin-bottom: var(--space-sm);">Apr 2023 — Jun 2024</span>
+            <p class="exp-desc">
+              Placeholder — describe your progression at Quandri here.
+              What did you own as AE, what shifted when you moved into
+              implementation, and what does the senior role look like now?
+            </p>
+            <div class="exp-tags">
+              <span class="tag">Insurance tech</span>
+              <span class="tag">Automation</span>
+              <span class="tag">Implementation</span>
+              <span class="tag">Account executive</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Airbase -->
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <span class="exp-company">Airbase</span>
+            <span class="exp-dates">Jan 2022 — Apr 2023 · 1 yr 4 mos</span>
+          </div>
+          <div class="exp-content">
+            <span class="exp-role">Senior Account Executive</span>
+            <p class="exp-desc">
+              Placeholder — describe your role at Airbase here.
+              Airbase is a spend management platform for finance teams.
+              What markets, deal sizes, or outcomes stand out?
+            </p>
+            <div class="exp-tags">
+              <span class="tag">Fintech</span>
+              <span class="tag">Spend management</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Push Operations -->
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <span class="exp-company">Push Operations</span>
+            <span class="exp-dates">Jun 2021 — Jan 2022 · 8 mos</span>
+          </div>
+          <div class="exp-content">
+            <span class="exp-role">Senior Account Executive</span>
+            <p class="exp-desc">
+              Placeholder — describe your role at Push Operations here.
+              Push is a workforce management platform for hourly teams.
+              What was your territory, approach, or key wins?
+            </p>
+            <div class="exp-tags">
+              <span class="tag">HR tech</span>
+              <span class="tag">Workforce management</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Procurify — two roles -->
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <span class="exp-company">Procurify</span>
+            <span class="exp-dates">May 2019 — May 2021 · 2 yrs 1 mo</span>
+          </div>
+          <div class="exp-content">
+            <span class="exp-role">Strategic Account Executive</span>
+            <span class="exp-dates" style="margin-bottom: 2px;">Nov 2020 — May 2021</span>
+            <span class="exp-role">Account Executive</span>
+            <span class="exp-dates" style="margin-bottom: var(--space-sm);">May 2019 — Nov 2020</span>
+            <p class="exp-desc">
+              Placeholder — describe your time at Procurify here.
+              Procurify is a procurement and spend management platform.
+              What did you own across both roles — outbound, demos, full cycle?
+            </p>
+            <div class="exp-tags">
+              <span class="tag">Procurement tech</span>
+              <span class="tag">SaaS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Nerds (rebranded to Estated) -->
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <span class="exp-company">Data Nerds</span>
+            <span class="exp-dates">Jul 2017 — May 2019 · 1 yr 11 mos</span>
+          </div>
+          <div class="exp-content">
+            <span class="exp-role">Founding Account Executive &amp; GTM Lead</span>
+            <p class="exp-desc">
+              Placeholder — describe your role at Data Nerds here.
+              What kind of data or analytics products were you selling,
+              and to what kinds of customers?
+            </p>
+            <div class="exp-tags">
+              <span class="tag">Data</span>
+              <span class="tag">Analytics</span>
+              <span class="tag">GTM</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /exp-list -->
+    </div><!-- /container -->
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       OPERATIONS & SALES CONSULTING
+       Placeholder entries for Tality and Bear's Blooms.
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="exp-section reveal">
+    <div class="container">
+
+      <span class="exp-section-label">Operations &amp; sales consulting</span>
+
+      <div class="exp-list">
+
+        <!-- Tality Kombucha -->
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <span class="exp-company">Tality Kombucha</span>
+            <span class="exp-dates">2019 — 2020</span>
+          </div>
+          <div class="exp-content">
+            <span class="exp-role">Consultant</span>
+            <p class="exp-desc">
+              Developed a scalable B2B outside sales model and successfully
+              expanded into dozens of retail locations including grocery chains,
+              cafes, and restaurants. Stood up lean but effective management
+              systems and tools to match the needs of the growing business.
+            </p>
+            <div class="exp-tags">
+              <span class="tag">Sales consulting</span>
+              <span class="tag">B2B sales</span>
+              <span class="tag">CPG</span>
+              <span class="tag">Retail expansion</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bear's Blooms -->
+        <div class="exp-entry">
+          <div class="exp-meta">
+            <span class="exp-company">Bear's Blooms</span>
+            <span class="exp-dates">2023 — Present</span>
+          </div>
+          <div class="exp-content">
+            <span class="exp-role">Consultant</span>
+            <p class="exp-desc">
+              Advising on strategy and growth for a successful Vancouver business
+              expanding into new markets. Developing the growth model and execution
+              strategy to create repeatable success across Canada.
+            </p>
+            <div class="exp-tags">
+              <span class="tag">Growth strategy</span>
+              <span class="tag">Operations</span>
+              <span class="tag">Small business</span>
+              <span class="tag">Market expansion</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /exp-list -->
+    </div><!-- /container -->
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       MORE COMING
+       Honest placeholder — sets expectation without looking
+       like an empty page.
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="more-coming reveal">
+    <div class="container">
+      <span>More projects</span>
+      <p>Coming as they're built.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-name">Max Colls</span>
+        <nav class="footer-nav">
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://peaklab.ca" target="_blank" rel="noopener">Peak Lab ↗</a>
+        </nav>
+        <span class="footer-copy">© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       JAVASCRIPT — scroll reveal (same as index.html)
+  ═══════════════════════════════════════════════════════════ -->
+  <script>
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-up');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>

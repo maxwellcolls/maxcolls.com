@@ -1,0 +1,538 @@
+/* ============================================================
+   styles.css — maxcolls.com
+   Shared design system for all pages
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1. GOOGLE FONTS IMPORT
+   Playfair Display = headings (serif, editorial)
+   DM Sans = body copy (clean, modern sans)
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap');
+
+
+/* ------------------------------------------------------------
+   2. CSS VARIABLES (design tokens)
+   These are the single source of truth for all colors,
+   fonts, and spacing. Change here = changes everywhere.
+   ------------------------------------------------------------ */
+:root {
+  /* Colors */
+  --color-bg:       #EDEADE;   /* warm off-white parchment */
+  --color-ink:      #12125C;   /* deep navy — primary ink color */
+  --color-green:    #2d6a2d;   /* forest green — accent */
+  --color-text:     #1a1a1e;   /* near-black for body copy */
+  --color-muted:    #6b6b7a;   /* lighter text for captions, labels */
+  --color-border:   rgba(18, 18, 92, 0.15); /* soft navy border */
+
+  /* Typography */
+  --font-heading:   'Playfair Display', Georgia, serif;
+  --font-body:      'DM Sans', system-ui, sans-serif;
+
+  /* Font sizes — fluid scale */
+  --text-xs:    0.75rem;    /*  12px */
+  --text-sm:    0.875rem;   /*  14px */
+  --text-base:  1rem;       /*  16px */
+  --text-lg:    1.125rem;   /*  18px */
+  --text-xl:    1.25rem;    /*  20px */
+  --text-2xl:   1.5rem;     /*  24px */
+  --text-3xl:   2rem;       /*  32px */
+  --text-4xl:   2.75rem;    /*  44px */
+  --text-5xl:   3.75rem;    /*  60px */
+  --text-6xl:   5rem;       /*  80px */
+
+  /* Spacing */
+  --space-xs:   0.5rem;
+  --space-sm:   1rem;
+  --space-md:   1.5rem;
+  --space-lg:   2.5rem;
+  --space-xl:   4rem;
+  --space-2xl:  6rem;
+  --space-3xl:  10rem;
+
+  /* Layout */
+  --max-width:      1100px;   /* max content width */
+  --content-width:  680px;    /* max width for body text (readability) */
+
+  /* Borders & radius */
+  --radius-sm:  4px;
+  --radius-md:  10px;
+  --radius-lg:  20px;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+}
+
+
+/* ------------------------------------------------------------
+   3. RESET & BASE
+   Removes browser defaults so we start from a clean slate.
+   ------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;  /* padding/border don't expand element size */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;               /* base for rem calculations */
+  scroll-behavior: smooth;       /* smooth anchor link scrolling */
+  -webkit-font-smoothing: antialiased;  /* crisper text on Mac */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.7;              /* comfortable reading line height */
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;               /* images never overflow their container */
+  display: block;
+}
+
+a {
+  color: inherit;                /* links inherit surrounding text color */
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+
+/* ------------------------------------------------------------
+   4. TYPOGRAPHY
+   Heading and body text styles used across all pages.
+   ------------------------------------------------------------ */
+
+/* All heading levels share the serif font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+/* Italic serif — use for subheadings, captions with flair */
+.text-italic {
+  font-style: italic;
+  font-family: var(--font-heading);
+}
+
+/* Utility text sizes */
+.text-sm   { font-size: var(--text-sm); }
+.text-lg   { font-size: var(--text-lg); }
+.text-muted { color: var(--color-muted); }
+
+/* Label — small caps style for section labels */
+.label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-green);
+}
+
+p {
+  max-width: var(--content-width);   /* keeps paragraphs readable */
+  color: var(--color-text);
+}
+
+
+/* ------------------------------------------------------------
+   5. LAYOUT UTILITIES
+   Reusable layout containers used on every page.
+   ------------------------------------------------------------ */
+
+/* Main page wrapper — centers content, adds side padding */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Full-width section with vertical breathing room */
+.section {
+  padding: var(--space-2xl) 0;
+}
+
+/* Divider line — thin navy rule between sections */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--space-xl) 0;
+}
+
+
+/* ------------------------------------------------------------
+   6. NAVIGATION
+   Top nav — appears on every page.
+   ------------------------------------------------------------ */
+.nav {
+  position: fixed;                /* sticks to top as you scroll */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;                   /* stays above all other elements */
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(237, 234, 222, 0.85);  /* semi-transparent parchment */
+  backdrop-filter: blur(8px);    /* frosted glass effect */
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Your name / logo on the left */
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-logo:hover {
+  opacity: 0.7;
+}
+
+/* Links on the right */
+.nav-links {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.nav-link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+/* Underline that slides in on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-ink);
+  transition: width var(--transition-base);
+}
+
+.nav-link:hover { color: var(--color-ink); }
+.nav-link:hover::after { width: 100%; }
+
+/* Active page indicator */
+.nav-link.active {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+.nav-link.active::after { width: 100%; }
+
+/* Offset page content so it doesn't hide under fixed nav */
+.page-offset {
+  padding-top: 80px;
+}
+
+
+/* ------------------------------------------------------------
+   7. BUTTONS
+   Two styles: primary (filled) and ghost (outlined).
+   ------------------------------------------------------------ */
+
+/* Base button styles shared by both */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;            /* sharp corners — fits the ink/etching vibe */
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+/* Primary: solid navy fill */
+.btn-primary {
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+  border-color: var(--color-ink);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--color-ink);
+  transform: translateY(-2px);   /* subtle lift on hover */
+}
+
+/* Ghost: outlined, transparent fill */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+  transform: translateY(-2px);
+}
+
+
+/* ------------------------------------------------------------
+   8. ILLUSTRATION / ASSET STYLES
+   For placing your crayon-etching images on pages.
+   ------------------------------------------------------------ */
+
+/* Base wrapper for all illustration placements */
+.illustration {
+  display: block;
+  /* Images have transparent-ish bg already — these mix modes
+     help them blend naturally into the parchment background */
+  mix-blend-mode: multiply;
+}
+
+/* Small inline illustration — e.g. next to a heading */
+.illustration-sm {
+  width: 80px;
+  height: auto;
+}
+
+/* Medium — e.g. beside a project card */
+.illustration-md {
+  width: 180px;
+  height: auto;
+}
+
+/* Large — hero centerpiece */
+.illustration-lg {
+  width: 320px;
+  height: auto;
+}
+
+/* Floated right with text wrapping around */
+.illustration-float-right {
+  float: right;
+  margin-left: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+/* Subtle parallax drift — add class + JS to trigger */
+.illustration-parallax {
+  transition: transform 0.1s linear;
+  will-change: transform;        /* tells browser to optimize this element */
+}
+
+
+/* ------------------------------------------------------------
+   9. CARDS
+   Used on the /work page for project display.
+   ------------------------------------------------------------ */
+.card {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: border-color var(--transition-base),
+              transform var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--color-ink);
+  transform: translateY(-4px);   /* lift on hover */
+}
+
+.card-label {
+  composes: label;               /* inherits the .label style */
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin-bottom: var(--space-sm);
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-ink);
+  margin-bottom: var(--space-sm);
+}
+
+.card-body {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.card-footer {
+  margin-top: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+
+/* ------------------------------------------------------------
+   10. FOOTER
+   Simple footer — appears on every page.
+   ------------------------------------------------------------ */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.footer-copy {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  font-family: var(--font-body);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.footer-link {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--color-ink);
+}
+
+
+/* ------------------------------------------------------------
+   11. ANIMATIONS
+   Reusable entrance animations triggered by scroll or page load.
+   ------------------------------------------------------------ */
+
+/* Fade up — elements start invisible and slide up into view */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in — elements just appear without moving */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Classes that trigger the animations */
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Staggered delays — add these to children to cascade the animation */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* Start hidden — JS will add .animate-fade-up when element enters viewport */
+.reveal {
+  opacity: 0;
+}
+
+
+/* ------------------------------------------------------------
+   12. RESPONSIVE
+   Mobile adjustments — applies when screen is 768px or narrower.
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+
+  /* Scale down heading sizes on small screens */
+  h1 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+
+  /* Less side padding on mobile */
+  .container {
+    padding: 0 var(--space-sm);
+  }
+
+  /* Stack nav links vertically on very small screens */
+  .nav-links {
+    gap: var(--space-md);
+  }
+
+  /* Smaller section padding on mobile */
+  .section {
+    padding: var(--space-xl) 0;
+  }
+
+  /* Full-width buttons on mobile */
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Illustrations scale down */
+  .illustration-lg {
+    width: 200px;
+  }
+
+  /* Float clears on mobile — illustrations stack above text */
+  .illustration-float-right {
+    float: none;
+    margin: 0 auto var(--space-md);
+  }
+
+  /* Footer stacks vertically */
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
